@@ -1,6 +1,5 @@
 import { Telegraf} from "telegraf";
 import env from 'dotenv'
-
 import {getClan, getPlayer} from "./getters/getters";
 
 env.config()
