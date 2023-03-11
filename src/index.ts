@@ -1,5 +1,8 @@
 import { Telegraf} from "telegraf";
 import env from 'dotenv'
+
+import {getClan, getPlayer} from "./getters/getters";
+
 env.config()
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
@@ -11,12 +14,14 @@ bot.command('getclan', async  (ctx) => await ctx.reply('Enter clan tag in format
 bot.command('getplayer', async (ctx) => await ctx.reply('Enter player tag in format - player: #123abc'))
 
 bot.on('text', async (ctx) => {
-    const userInput: string = ctx.message.text
-
-    console.log(userInput)
+    const userInput: string = ctx.message.text;
 
     if(userInput.includes('clan:')) {
-        await ctx.reply('Clan tag ' + userInput.slice(userInput.indexOf('#')+1, userInput.length))
+        const tag = userInput.slice(userInput.indexOf('#')+1, userInput.length)
+
+       await getClan(tag).then(res => {
+             ctx.reply(res.description)
+        })
     }
 
     if(userInput.includes('player:')) {

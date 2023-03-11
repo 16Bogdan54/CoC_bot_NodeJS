@@ -4,13 +4,13 @@ import env from 'dotenv'
 env.config()
 
 const client = new Client({
-    keys: [process.env.API_TOKEN],
+    keys: [process.env.API_KEY],
     cache: true,
     retryLimit: 2,
     restRequestTimeout: 5000,
 });
 
-export const getClan = async (tag: string): Promise<Clan> => {
+export const getClan = async (tag: string):Promise<Clan> => {
     return await client.getClan(tag);
 }
 
