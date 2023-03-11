@@ -21,11 +21,15 @@ bot.on('text', async (ctx) => {
 
        await getClan(tag).then(res => {
              ctx.reply(res.description)
-        })
+       })
     }
 
     if(userInput.includes('player:')) {
-        await ctx.reply('Player tag ' + userInput.slice(userInput.indexOf('#')+1, userInput.length))
+        const tag = userInput.slice(userInput.indexOf('#')+1, userInput.length)
+
+        await getPlayer(tag).then(res => {
+            ctx.reply(`level: ${res.expLevel} name: ${res.name}`)
+        })
     }
 
 })
