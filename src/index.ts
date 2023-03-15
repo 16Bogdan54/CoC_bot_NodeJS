@@ -38,10 +38,10 @@ bot.on('text', async (ctx) => {
         await getPlayer(tag).then(res => {
             let playerReply = '';
             for (const [key, value] of Object.entries(res)) {
-                // if(typeof  value === "string") {
+                if(typeof value === "string" || typeof value === "number") {
                     playerReply += `${key.replace(/([A-Z])/g, ' $1')
-                        .replace(/^./, str => str.toUpperCase())}: ${value}\n`;
-                // }
+                    .replace(/^./, str => str.toUpperCase())}: ${value}\n`;
+                }
             }
 
             ctx.reply(playerReply)
