@@ -22,8 +22,10 @@ bot.on('text', async (ctx) => {
 
            let clanReply = '';
            for (const [key, value] of Object.entries(res)) {
-               clanReply += `${key.replace(/([A-Z])/g, ' $1')
-                   .replace(/^./, str => str.toUpperCase())}: ${value}\n`;
+             if(typeof  value === "string") {
+                 clanReply += `${key.replace(/([A-Z])/g, ' $1')
+                     .replace(/^./, str => str.toUpperCase())}: ${value}\n`;
+             }
            }
 
              ctx.reply(clanReply)
