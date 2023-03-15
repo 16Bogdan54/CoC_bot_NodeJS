@@ -36,7 +36,15 @@ bot.on('text', async (ctx) => {
         const tag = userInput.slice(userInput.indexOf('#')+1, userInput.length)
 
         await getPlayer(tag).then(res => {
-            ctx.reply(`level: ${res.expLevel} name: ${res.name}`)
+            let playerReply = '';
+            for (const [key, value] of Object.entries(res)) {
+                // if(typeof  value === "string") {
+                    playerReply += `${key.replace(/([A-Z])/g, ' $1')
+                        .replace(/^./, str => str.toUpperCase())}: ${value}\n`;
+                // }
+            }
+
+            ctx.reply(playerReply)
         })
     }
 
