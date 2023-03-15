@@ -19,7 +19,14 @@ bot.on('text', async (ctx) => {
         const tag = userInput.slice(userInput.indexOf('#')+1, userInput.length)
 
        await getClan(tag).then(res => {
-             ctx.reply(res.description)
+
+           let clanReply = '';
+           for (const [key, value] of Object.entries(res)) {
+               clanReply += `${key.replace(/([A-Z])/g, ' $1')
+                   .replace(/^./, str => str.toUpperCase())}: ${value}\n`;
+           }
+
+             ctx.reply(clanReply)
        })
     }
 
@@ -35,4 +42,4 @@ bot.on('text', async (ctx) => {
 
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 
-bot.launch().then(r => console.log(r))
+bot.launch();
